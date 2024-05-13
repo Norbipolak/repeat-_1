@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 5000px;
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    border: 5px solid red;
+    padding: 15px;
+}
+
+.float-left {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+    background-color: red;
+    line-height: 200px; /*hogy középen legyenek a dolgok, amiket ide beleyírunk, hogy 1,2,3,4 */
+    color: white;
+    text-align: center; 
+    float: left;
+    /*
+    Csináltunk 4 darab div-et ezzel a float-left-vel, és ha nem adunk meg neki semmilyen float tulajdonságot, akkor ugye egymás alatt 
+    helyezkednek el, mert ezek div-ek, ugye, de viszont ha megadjuk neki a float: left tulajdonságot, akkor meg bemennek egymás mellé 
+    és azért left, mert a képernyő bal oldalától kezdődik így -> 1, 2, 3, 4 
+    ha meg float: right, akkor a jobb oldaltól kezdődik így -> 4, 3, 2, 1  
+    */
+}
+
+.float-right {
+    height: 200px;
+    width: 200px;
+    margin: 5px;
+    background-color: red;
+    line-height: 200px;
+    color: white;
+    text-align: center;
+    float: right;  
+}
+
+/*
+de nagyon, fontos, hogy ezt a float tulajdonságot meg kell majd szüntetni, mert amig nincsen clear, addig az összes elemre fog vonatkozni
+
+    <div class="float-left">1</div>
+    <div class="float-left">2</div>
+    <div class="float-left clear-left">3</div>
+    <div class="float-left">4</div>
+
+pl. ilyen esetben a clear-left-et megadtuk ugye a harmadik elemnek és akkor a harmadik elem az már le ment egy másik sorba 
+de nagyon fontos, hogy a 4 elem az ugyanúgy mellette van, mert a float-left class-val az is el van látva!!! 
+
+ha meg akarjuk szüntetni, akkor csinálunk egy div-et és adunk neki egy clear: both-ot, ami mindegyik a float-left-et illetve a float-right-ot 
+is megszünteti
+    <div class="float-left">1</div>
+    <div class="float-left">2</div>
+    <div class="float-left clear-left">3</div>
+    <div class="float-left">4</div>
+    <div class="clear"></div>
+
+és akkor onnan kezdve már nincsen ilyen és normálisan megy a dokumentum menete 
+
+float-right az teljesen ugyanez csak fordítva, ahogy írtam itt úgy kezdődik, hogy 4, 3, 2, 1 
+és ha megadunk egy clear-right-ot a harmadik elemnek akkor meg 
+-> 2, 1
+   4, 3 
+
+és ha ezt is meg akarjuk végleg szüntetni, akkor meg csonálunk egy div-et mint az elöbb clear: both-val
+
+    <div class="float-right">1</div>
+    <div class="float-right">2</div>
+    <div class="float-right clear-right">3</div>
+    <div class="float-right">4</div>
+
+de nagyon fontos, hogy ez csak azokra az elemekre lesz hatással mik utánuk fognak következni!!!!!!!!!!!!!!!!!!!!!!
+*/
+
+.clear-left {
+    clear: left;
+}
+
+.clear-right {
+    clear: right;
+}
+
+.clear {
+    clear: both;
+}
+
+/*
+display tulajdonságok -> block 
+az elemek egymás alatt helyezkednek el, csináltunk 4 darab span-t, mert azok alapból inline-ok és egymás alatt helyezkednek el 
+de viszont, ha kapnak egy olyan class-t, hogy display: block, akkor egymás alatt fognak elhelyezkedni 
+Melyikek azok az elemek, amelyeknek alapból inline tulajdonságuk van, mint a span-nak 
+1. <a> a tag, amiben vannak a hyperlink-ek 
+2. <strong> strong meg italic 
+3. <img> amikor egy img-t akarunk beletenni a dokument-be, ezért kell ha több kép van, hogy display: block legyen ha azt akarjuk, hogy 
+egymás alatt legyenek 
+4. <input>
+5. <button>
+Nagyon, fontos az input és a button, mert ezek is egymás mellett lesznek és akkor kell a display: block 
+
+    <span class="block">1</span>
+    <span class="block">2</span>
+    <span class="block">3</span>
+    <span class="block">4</span>
+    <i class="block">Italic</i>
+    <b class="block">asdsdgferg</b>
+*/
+
+.block {
+    display: block;
+}
+
+/*
+display: inline, egymás mellé rendezi az elemeket és ezeknek az elemeknek nem adhatóak meg a szélleség és a magasság 
+ezért csináltunk 3 darab div-et, ami alapból block szóval egymás alatt helyezkednek el de megadtunk neki egy display: inline class-t 
+és akkor berakta őket egymás alá 
+    <div class="inline">1</div>
+    <div class="inline">2</div>
+    <div class="inline">3</div>
+*/
+
+.inline {
+    display: inline;
+}
+
+/*
+Inline-block ugyanaz, mint az inline, tehát az elemek egy sorban lesznek, de viszont így meg tudunk nekik határozni magasságot illetve 
+szélességet 
+*/
+
+.inline-block {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    background-color: red;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+/***************************************************************************************************************************************/
+/*
+CSS poziciónálás 
+1. static az alapértelmezett, itt nem müködnek nála a left, right, top, bottom tulajdonságok 
+*/
+
+.static-square {
+    height: 200px;
+    width: 200px;
+    background-color: aqua;
+    position: static;
+    left: 200px; /*ez itt nem müködik*/
+}
+
+/*
+2. relative, itt már érvényben van a left, right, top, bottom tulajdonságok 
+Csináltunk két div-et, mindegyiknek megadtuk, hogy position: relative és left: 50px;
+mindkét square ami ugye egymás alatt helyezkednek el egy 5px-es margin-val eltávolodott a képernyő bal oldalától 50px-elt 
+*/
+
+.relative-square {
+    height: 200px;
+    width: 200px;
+    background-color: khaki;
+    position: relative;
+    margin: 5px 0;
+    left: 50px;
+}
+
+/*
+3. absolute, itt is müködnek a left, right, top, bottom tulajdonságok, de viszont ő egy abszolut poziciót határoz meg és nem veszi figyelembe 
+a többi elemnek az elhelyezkedését 
+Szóval csinálunk két div-et és mindegyik megkapja a position: absolute-ot és teljesen ugyanazokat a tulajdonságokat, akkor 
+ez a két square, az egyik a másik alatt fog elhelyezkedni és azt nem fogjuk látni, csak akkor, hogyha más width és height van meghatározva 
+tehát ha mondjuk az alsónak nagyobb a width-je akkor az a rész amennyivel nagyobb a felsőnél az látszódni fog 
+ha meg azt akarjuk, hogy másik legyen felül akkor meg a z-index-vel tudjuk ezt megcserélni!!!!! 
+
+    <div class="absolute-square" style="background-color:blue;"></div>
+    <div class="absolute-square" style="background-color:crimson;"></div>
+
+így teljsesen egymás alatt vannak és csak a crimson fog láts
+
+    <div class="absolute-square" style="background-color:blue; left:80px;"></div>
+    <div class="absolute-square" style="background-color:crimson;"></div>
+
+Így mivel mindkettő alapból left: 50px, de viszont az alsónak felülírtük a html-ben left: 80px;-re ezért 
+abból fog jobbra az a plusz 30px látszódni!!!! 
+
+    <div class="absolute-square" style="background-color:blue; left:80px; z-index: -1;"></div>
+    <div class="absolute-square" style="background-color:crimson; z-index: -2;"></div>
+
+Így pedig az első lesz felül, mert annak a z-index-e nagyobb, mint a másodiknak, mindegy, hogy milyen értékeket adunk meg nekik 
+az a lényeg, hogy melyiknek a nagyobb és akkor az lesz felül!!!!! 
+
+.absolute-square {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50px;
+    margin: 5px 0;
+}
+
+/*
+nagyon fontos itt, hogy most csak a left van meghatározva és akkor csak a bal felétől távolodik el 50px-elt, de benne van a dokumentum flow-ban 
+ha viszont majd meghatározzuk a top-ot is akkor a dokumentum tetejétől lesz annyi px-vel, mint amennyit megadunk neki 
+*/
+
+.fully-absolute-square {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 150px;
+    left: 500px;
+    background-color: darkgoldenrod;
+}
+
+/*
+Itt viszont már meg van adva a top és ebben az esetben a képernyő legtetejétől lesz 150px-re és nem a látható, hanem tényleg a legteteje 
+bal oldalot meg el fog távolodni 500px-t jobbra!!!!! 
+és mindegy, hogy ott már volt-e valami ez rajta lesz, a tetején lesz azoknak a dolgoknak 
+*/
+
+/* 
+4. Fixed pozició 
+Nagyon fontos, hogy a fixed az olyan, mint az absolute, azzal a különbséggel, hogy itt ha húzzuk lefele a képernyőt, akkor az jön lefele 
+szóval, mindig a látható képernyőn lesz a dolog egy bizonyos pozicióban 
+*/
+
+.fixed-square {
+    width: 200px;
+    height: 200px;
+    background-color: firebrick;
+    position: fixed;
+    left: 500px;
+    top: 150px;
+}
+
+/*
+Ha a képernyő legtetején vagyunk akkor ugyanott lesz, ahol az absolute (rajta lesz), de ha viszont húzzuk lefele a képernyőt, akkor jön vele 
+a fixed-square is és mindig a látható képernyő tetejétől lesz 150px-re, illetve a jobbra 500px-elt 
+*/
+
+/*
+Sticky az meg relative az elején tehát, a többi elemhez képest, helyezkedik el úgy amit megadtunk a left meg a top-val
+de utána ha húzzuk lefele a képernyőt akkor meg fixed lesz és jön lefele annyira lesz a tetejétől meg jobbra, amennyit 
+beállítottunk, teljesen úgy, mint a fixed -> látható képernyő 
+*/
+
+.sticky-square {
+    height: 200px;
+    width: 200px;
+    position: sticky;
+    left: 150px;
+    top: 150px;
+    background-color: goldenrod;
+}
